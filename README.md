@@ -9,16 +9,11 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 | `KI-Werkstatt-Praesentation.pdf` | Präsentation, 18 Folien, Stand 05.10.2026 |
 | `impressum.html` | Impressum (§ 18 Abs. 1 MStV, Schuladresse) und Datenschutz |
 
-## Auftrag: hochladen, aber NICHT veröffentlichen
-1. Privates GitHub-Repository `KI-Werkstatt` im Konto anlegen, mit dem auch die anderen Apps laufen (mitlaeuferfotografie).
-2. Alle Dateien dieses Ordners auf den Branch `main` pushen. Commit-Nachricht: „KI-Werkstatt: Workshop-Seite, Präsentation, Impressum“.
-3. **GitHub Pages NICHT einschalten.** Das Repo bleibt privat.
-   Beispiel: `gh repo create KI-Werkstatt --private --source . --push`
-
-## Später veröffentlichen (erst wenn Peter es ausdrücklich sagt)
-- Im kostenlosen GitHub-Tarif geht Pages nur mit öffentlichem Repo: Repo auf **public** stellen, dann Settings → Pages → Branch `main`, Ordner `/ (root)`.
-- Adresse danach: `https://mitlaeuferfotografie.github.io/KI-Werkstatt/`
-- Achtung: Öffentlich heißt, auch die PDF mit den Material-Ausschnitten ist für alle abrufbar. Vorher prüfen, dass keine Namen oder Daten von Kindern darin stehen.
+## Status: veröffentlicht (07.10.2026)
+- Repository `mitlaeuferfotografie/KI-Werkstatt` ist **öffentlich**, GitHub Pages läuft von Branch `main`, Ordner `/ (root)`.
+- Adresse: https://mitlaeuferfotografie.github.io/KI-Werkstatt/
+- Vor der Veröffentlichung geprüft: Die PDF enthält keine Namen oder Daten von Kindern.
+- Achtung: Alles, was hier hochgeladen wird, ist sofort für alle abrufbar. Neue Material-Ausschnitte vorher auf Namen und Daten von Kindern prüfen.
 
 ## Regeln für Änderungen
 - Keine externen Ressourcen einbinden (keine Google Fonts, keine CDNs, kein Tracking). Nur Systemschriften.
