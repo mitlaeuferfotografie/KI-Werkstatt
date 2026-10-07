@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KI-Werkstatt Unterrichtsvorbereitung</title>
+<style>
+/* Nur Systemschriften: die Seite lädt nichts von fremden Servern. Layout: eine ruhige Lesespalte wie ein Arbeitsheft; die vier Wege als Register, Prompts als Karteikarten mit Kopierknopf */
+:root{
+  --paper:#F7F4EE; --sheet:#FFFDF8; --ink:#1F2A3A; --ink-soft:#4A5568; --line:#DDD5C6;
+  --teal:#22686E; --teal-soft:#E3EFEE; --warm:#A8560F; --warm-fill:#F6DDBC; --onteal:#F7F4EE;
+  --mark:#FCE7C8; --code:#F1ECE2;
+  --f-display: Georgia, 'Times New Roman', serif;
+  --f-body: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#151C26; --sheet:#1D2633; --ink:#ECE7DD; --ink-soft:#B6BFCC; --line:#334155;
+  --teal:#6CC0C3; --teal-soft:#1E3A3D; --warm:#F2B266; --warm-fill:#4A3418; --onteal:#10262A;
+  --mark:#4A3418; --code:#232E3D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#151C26; --sheet:#1D2633; --ink:#ECE7DD; --ink-soft:#B6BFCC; --line:#334155;
+  --teal:#6CC0C3; --teal-soft:#1E3A3D; --warm:#F2B266; --warm-fill:#4A3418; --onteal:#10262A;
+  --mark:#4A3418; --code:#232E3D; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;padding:0 16px}
+.wrap{max-width:860px;margin:0 auto;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0;color:var(--ink)}
+h1{font-size:clamp(2rem,6vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
+.lead{font-size:1.15rem;color:var(--ink-soft);max-width:62ch}
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+.muted{color:var(--ink-soft)}
+
+/* Kopf */
+header{display:flex;flex-direction:column;gap:18px}
+.focus{border:2px solid var(--warm);background:var(--sheet);border-radius:12px;padding:14px 18px}
+.focus b{color:var(--warm)}
+.timeline{display:grid;grid-template-columns:30fr 45fr 15fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--sheet)}
+.timeline div{padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.timeline div+div{border-left:1px solid var(--line)}
+.timeline .now{background:var(--teal);color:var(--onteal)}
+.timeline b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.timeline span{font-size:.92rem}
+@media (max-width:520px){.timeline{grid-template-columns:1fr}.timeline div+div{border-left:none;border-top:1px solid var(--line)}}
+
+/* Werkzeugwahl */
+.toolpick{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toolpick button{font:inherit;font-weight:700;padding:8px 18px;border-radius:999px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer}
+.toolpick button[aria-pressed="true"]{background:var(--teal);color:var(--onteal)}
+.tooltips{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px}
+.tip{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.tip h3{font-family:var(--f-body);font-size:1rem;font-weight:800}
+
+/* Regeln */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:620px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.rule h3{font-family:var(--f-body);font-size:1rem;font-weight:800;margin-bottom:6px}
+.rule.ok h3{color:var(--teal)} .rule.no h3{color:var(--warm)}
+.rule ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+
+/* Drei Schritte */
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.steps .n{font-family:var(--f-display);font-size:1.8rem;color:var(--teal);line-height:1}
+.steps strong{display:block}
+
+/* Register der Wege */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:2px solid var(--line);padding-bottom:0}
+.tabs button{font:inherit;font-weight:700;background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;padding:10px 14px;color:var(--ink-soft);cursor:pointer;text-align:left}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--warm)}
+.tabs .letter{font-family:var(--f-display);color:var(--teal);margin-right:6px}
+.panel{display:flex;flex-direction:column;gap:20px;padding-top:6px}
+.panel-intro{display:flex;flex-direction:column;gap:6px}
+
+/* Prompt-Karte */
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px 18px;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.card-top span{font-size:.85rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.copy{font:inherit;font-size:.92rem;font-weight:800;padding:7px 14px;border-radius:8px;border:none;background:var(--teal);color:var(--onteal);cursor:pointer}
+.copy.done{background:var(--warm-fill);color:var(--ink)}
+.prompt{margin:0;padding:16px 18px;font-family:var(--f-body);font-size:1rem;line-height:1.6;white-space:pre-wrap;word-wrap:break-word;color:var(--ink)}
+.ph{background:var(--mark);border-radius:4px;padding:0 3px;font-weight:700}
+.check{display:flex;flex-direction:column;gap:8px}
+.check h3{font-family:var(--f-body);font-size:1rem;font-weight:800}
+.check ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.planb{background:var(--sheet);border:1px dashed var(--line);border-radius:12px;padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.planb h3{font-family:var(--f-body);font-size:1rem;font-weight:800}
+.planb ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--sheet)}
+.tools{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px}
+.tools th,.tools td{padding:10px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+.tools thead th{border-top:none;font-weight:800;color:var(--teal)}
+.tools tbody th{font-weight:700;color:var(--ink);width:28%}
+.tools small{color:var(--ink-soft);font-weight:400}
+.twocol{display:grid !important;grid-template-columns:1fr 1fr;column-gap:48px}
+@media (max-width:560px){.twocol{grid-template-columns:1fr}}
+.steps3{display:flex;flex-direction:column;gap:8px}
+.steps3-title{font-weight:800}
+.steps3-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:620px){.steps3-row{grid-template-columns:1fr}}
+.steps3-row p{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.steps3-row .n{font-family:var(--f-display);font-size:1.4rem;color:var(--teal);line-height:1}
+.overview{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sheet)}
+.overview li{padding:10px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.overview li+li{border-left:1px solid var(--line)}
+.overview span{font-size:.9rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+@media (max-width:620px){.overview{grid-template-columns:1fr 1fr}.overview li:nth-child(3){border-left:none}.overview li:nth-child(n+3){border-top:1px solid var(--line)}}
+.steps-list{gap:12px}
+.step{background:var(--sheet);border:1px solid var(--line);border-radius:14px}
+.step[open]{border-color:var(--teal)}
+.step>summary{list-style:none;cursor:pointer;display:flex;gap:16px;align-items:flex-start;padding:16px 18px}
+.step>summary::-webkit-details-marker{display:none}
+.step>summary::after{content:"+";margin-left:auto;font-size:1.6rem;line-height:1;color:var(--teal);font-weight:700}
+.step[open]>summary::after{content:"–"}
+.step-num{flex:none;width:40px;height:40px;border-radius:50%;background:var(--teal);color:var(--onteal);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:1.2rem}
+.step-head{display:flex;flex-direction:column;gap:2px;min-width:0}
+.step-title{font-family:var(--f-display);font-size:1.3rem;font-weight:700}
+.step-title small{font-family:var(--f-body);font-size:.9rem;font-weight:700;color:var(--warm);margin-left:6px}
+.step-desc{color:var(--ink-soft)}
+.step-body{padding:4px 18px 20px;display:flex;flex-direction:column;gap:16px;border-top:1px dashed var(--line);padding-top:18px}
+.step-body h3{font-family:var(--f-display);font-size:1.15rem}
+.extra .step-title{font-size:1.1rem}
+.button{display:inline-block;background:var(--teal);color:var(--onteal);font-weight:800;padding:10px 18px;border-radius:10px;text-decoration:none}
+.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.example{display:flex;gap:14px;align-items:flex-start;background:var(--teal-soft);border-radius:12px;padding:14px 18px}
+.example b{color:var(--teal)}
+.hint{border-left:4px solid var(--warm);padding:4px 0 4px 14px;color:var(--ink-soft)}
+
+/* Nachsteuern */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:inherit;font-size:.95rem;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer;text-align:left}
+.chips button.done{background:var(--warm-fill)}
+
+/* Links */
+.links{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px;border:1px solid var(--line);border-radius:12px;background:var(--sheet);padding:6px 16px}
+@media (max-width:560px){.links{grid-template-columns:1fr}}
+.links a{display:flex;flex-direction:column;gap:0;padding:8px 0;border-bottom:1px dashed var(--line);text-decoration:none;color:var(--ink);min-width:0}
+.links a:hover strong{text-decoration:underline}
+.links small{color:var(--ink-soft);font-size:.88rem}
+.links strong{color:var(--teal)}
+
+/* Reflexion */
+.refl{margin:0;padding:14px 18px 14px 2.4em;display:flex;flex-direction:column;gap:6px;background:var(--sheet);border:1px solid var(--line);border-radius:12px}
+.more{background:var(--sheet);border:1px solid var(--line);border-radius:12px}
+.more summary{cursor:pointer;padding:14px 18px;font-weight:800;color:var(--teal)}
+.more-body{padding:0 20px 18px;display:flex;flex-direction:column;gap:10px}
+.more-body h3{font-family:var(--f-body);font-size:1rem;font-weight:800;margin-top:6px}
+.more-body ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.pdf-frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sheet);aspect-ratio:16/10}
+.pdf-frame iframe{width:100%;height:100%;border:0;display:block}
+@media (max-width:700px){.pdf-frame{display:none}}
+footer .legal{margin-top:8px}
+footer{font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-weight:700;font-size:.95rem}
+@media (prefers-reduced-motion:no-preference){.copy,.chips button,.tabs button{transition:background .15s,border-color .15s}}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Information und Workshop im Kollegium · Stand: 05.10.2026</p>
+  <h1>KI-Werkstatt Unterrichtsvorbereitung</h1>
+  <p class="lead">Unterricht vorbereiten, Material anpassen, Organisation: Ihr bringt Material oder Stichpunkte mit, die KI macht den ersten Entwurf, ihr prüft und passt an.</p>
+  <div class="focus" role="note">
+    <p><b>KI für uns Lehrkräfte, nicht für die Kinder.</b> Offene KI-Modelle wie Gemini, ChatGPT oder Claude sind für Kinder aus Datenschutzgründen tabu. Kinderarbeiten und Prüfungen darf KI derzeit nicht korrigieren oder bewerten. Die Kinder bekommen nur ganz normales, von uns geprüftes Material.</p>
+  </div>
+  <ol class="overview" aria-label="Ablauf der 90 Minuten">
+    <li><b>1 · Impuls</b><span>max. 30 Min.</span></li>
+    <li><b>2 · Startklar</b><span>5 Min.</span></li>
+    <li><b>3 · Bauen und prüfen</b><span>35 Min.</span></li>
+    <li><b>4 · Festhalten und teilen</b><span>5 + 15 Min.</span></li>
+  </ol>
+  <p class="muted">Die Schritte lassen sich unten einzeln aufklappen.</p>
+</header>
+
+<section class="steps-list" aria-label="Ablauf in vier Schritten">
+<details class="step" id="s1">
+  <summary>
+    <span class="step-num">1</span>
+    <span class="step-head"><span class="step-title">Impuls <small>max. 30 Min.</small></span><span class="step-desc">Was KI uns Lehrkräften abnehmen kann, an Beispielen aus dem Unterricht. Hier liegt auch die Präsentation.</span></span>
+  </summary>
+  <div class="step-body">
+    <p>Die Präsentation zum Nachlesen (PDF, 18 Folien):</p>
+    <p><a class="button" href="KI-Werkstatt-Praesentation.pdf" target="_blank" rel="noopener">Präsentation öffnen</a></p>
+    <div class="pdf-frame"><iframe src="KI-Werkstatt-Praesentation.pdf#view=FitH" title="Präsentation KI-Werkstatt" loading="lazy"></iframe></div>
+    <h3>Das Wichtigste in Kürze</h3>
+    <ul class="plain">
+      <li>KI ist hier unser Werkzeug als Lehrkräfte. Kinder arbeiten nicht mit offenen KI-Modellen, und KI korrigiert oder bewertet keine Kinderarbeiten.</li>
+      <li>Die Arbeit verschiebt sich vom Erstellen zum Beurteilen. Geprüft wird immer, aber prüfen geht schneller als erfinden.</li>
+      <li>Drei Level: Chat (heute für alle), Projekt mit Gedächtnis (Vorlagen und Regeln einmal hinterlegen), Agent und Code (Ausblick).</li>
+      <li>Beispiele: Material für fachfremd Unterrichtende, Lernkontrolle mit Erwartungshorizont, Orga wie Epochenplan und Elternbrief, Stundenentwürfe im eigenen Format.</li>
+      <li>Die KI klingt auch dann sicher, wenn sie falsch liegt. Fachliches, Zitate und Termine immer selbst prüfen.</li>
+    </ul>
+  </div>
+</details>
+
+<details class="step" id="s2">
+  <summary>
+    <span class="step-num">2</span>
+    <span class="step-head"><span class="step-title">Startklar machen <small>5 Min.</small></span><span class="step-desc">Werkzeug wählen, Regeln kennen, eigenes Material bereitlegen.</span></span>
+  </summary>
+  <div class="step-body">
+    <h3>Werkzeug wählen</h3>
+    <p class="muted">Nehmt das Werkzeug, das ihr kennt oder ausprobieren wollt. Die kostenlose Version reicht, alle Vorlagen unten funktionieren überall.</p>
+  <div class="tablewrap">
+  <table class="tools">
+    <thead><tr><th scope="col"></th><th scope="col">Gemini</th><th scope="col">ChatGPT</th><th scope="col">Claude</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Öffnen</th><td><a href="https://gemini.google.com" target="_blank" rel="noopener">gemini.google.com</a><br><small>Google-Konto</small></td><td><a href="https://chatgpt.com" target="_blank" rel="noopener">chatgpt.com</a><br><small>E-Mail-Adresse</small></td><td><a href="https://claude.ai" target="_blank" rel="noopener">claude.ai</a><br><small>E-Mail-Adresse</small></td></tr>
+      <tr><th scope="row">Datei oder Foto hochladen</th><td><b>+</b> im Eingabefeld</td><td><b>+</b> im Eingabefeld</td><td><b>+</b> oder Büroklammer</td></tr>
+      <tr><th scope="row">Regeln dauerhaft hinterlegen</th><td><b>Gem</b> anlegen</td><td><b>Projekt</b> anlegen</td><td><b>Projekt</b> anlegen</td></tr>
+      <tr><th scope="row">Interaktive Übung bauen <small>(nur für Weg D)</small></th><td><b>Canvas</b> unter dem Eingabefeld einschalten</td><td><b>Canvas</b> über das <b>+</b> wählen</td><td>Darum bitten, Claude baut ein <b>Artefakt</b></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="hint"><b>Dienstlich: AIS.chat</b> vom Land NRW. Datenschutzrechtlich die sichere Wahl, kann aber deutlich weniger. Anmeldung: <a href="https://nrw.ais.schule/login" target="_blank" rel="noopener">nrw.ais.schule/login</a></p>
+  <div class="planb">
+    <h3>Wenn es hakt</h3>
+    <ul class="twocol">
+      <li><b>Kein Konto?</b> Zu zweit arbeiten.</li>
+      <li><b>Kein Material?</b> Eins aus unserem OneDrive nehmen.</li>
+      <li><b>Nur ein iPad?</b> Geht, am Laptop ist es leichter.</li>
+      <li><b>Hängt fest?</b> Früh fragen.</li>
+    </ul>
+  </div>
+    <h3>Was rein darf und was nicht</h3>
+  <div class="rules">
+    <div class="rule ok"><h3>Geht</h3><ul>
+      <li>Eigene Arbeitsblätter, Entwürfe, Notizen, Fotos davon</li>
+      <li>Lehrplan und Schulbuchseiten als Grundlage</li>
+      <li>Lerngruppe ohne Namen beschreiben: „Klasse 3, vier Kinder lesen noch langsam“</li>
+      <li>Orga-Stichpunkte ohne Namen</li>
+    </ul></div>
+    <div class="rule no"><h3>Geht nicht</h3><ul>
+      <li>Namen, Noten, Förderpläne, Zeugnistexte, Fotos von Kindern</li>
+      <li>Kinderarbeiten oder Prüfungen zum Korrigieren oder Bewerten</li>
+      <li>Geschützte Texte (Liedtexte, Schulbuchkapitel) ungeprüft weitergeben</li>
+    </ul></div>
+  </div>
+  <div class="steps3">
+    <p class="steps3-title">Ein guter Prompt in drei Schritten <span class="muted">(Prompt = der Arbeitsauftrag, den ihr der KI gebt)</span></p>
+    <div class="steps3-row">
+      <p><span class="n">1</span><strong>Grund und Ziel</strong>Für wen, wozu, wo steht die Lerngruppe?</p>
+      <p><span class="n">2</span><strong>Zeigen statt beschreiben</strong>Altes Blatt, Notizen oder Vorlage hochladen.</p>
+      <p><span class="n">3</span><strong>Was fertig heißt</strong>Woran erkennt ihr ein gutes Ergebnis? Was soll nicht rein?</p>
+    </div>
+  </div>
+  </div>
+</details>
+
+<details class="step" id="s3">
+  <summary>
+    <span class="step-num">3</span>
+    <span class="step-head"><span class="step-title">Bauen und prüfen <small>35 Min.</small></span><span class="step-desc">Einen von fünf Wegen wählen, mit der Kopiervorlage einen Entwurf erstellen, prüfen und nachsteuern.</span></span>
+  </summary>
+  <div class="step-body">
+    <p class="muted">Material wählen 5 · bauen 25 · prüfen 10 · festhalten 5 Minuten. Die <span class="ph">markierten Stellen</span> ersetzt ihr nach dem Kopieren.</p>
+
+  <div class="tabs" role="tablist" aria-label="Wege">
+    <button type="button" role="tab" id="tab-a" aria-controls="p-a" aria-selected="true"><span class="letter">A</span>Differenzieren</button>
+    <button type="button" role="tab" id="tab-b" aria-controls="p-b" aria-selected="false"><span class="letter">B</span>Lernkontrolle</button>
+    <button type="button" role="tab" id="tab-c" aria-controls="p-c" aria-selected="false"><span class="letter">C</span>Fachfremd Unterrichtende</button>
+    <button type="button" role="tab" id="tab-d" aria-controls="p-d" aria-selected="false"><span class="letter">D</span>Interaktiv</button>
+    <button type="button" role="tab" id="tab-e" aria-controls="p-e" aria-selected="false"><span class="letter">E</span>Orga</button>
+  </div>
+
+  <div class="panel" role="tabpanel" id="p-a" aria-labelledby="tab-a">
+    <div class="panel-intro">
+      <h3>Ein Arbeitsblatt, zwei Niveaus</h3>
+      <p class="muted">Ihr ladet ein vorhandenes Arbeitsblatt hoch und bekommt eine Support- und eine Challenge-Fassung mit denselben Aufgabennummern.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span>Kopiervorlage</span><button class="copy" type="button" id="copy-a">Kopieren</button></div>
+<pre class="prompt" id="pr-a">Ich bin Lehrkraft an einer Grundschule in NRW und unterrichte <span class="ph">[Fach]</span> in Klasse <span class="ph">[Klasse]</span>. Im Anhang ist ein Arbeitsblatt zum Thema <span class="ph">[Thema]</span>.
+Meine Lerngruppe: <span class="ph">[z. B. 24 Kinder, einige lesen noch langsam, zwei Kinder sprechen wenig Deutsch]</span>.
+
+Erstelle daraus zwei Fassungen:
+1. Support: gleiche Lernziele, kürzere Sätze, Hilfen wie Wortspeicher oder ein Beispiel.
+2. Challenge: gleiche Aufgaben, dazu eine Knobel- oder Transferaufgabe.
+
+Fertig ist es, wenn
+- jede Fassung auf eine DIN-A4-Seite passt,
+- die Aufgabennummern in beiden Fassungen gleich sind, damit wir gemeinsam besprechen können,
+- keine Fremdwörter vorkommen.
+Schreib am Ende kurz auf, was du gegenüber dem Original verändert hast.</pre>
+    </div>
+    <div class="example"><p><b>So bei uns:</b> Die Stundenentwürfe Musik haben feste Zeilen für <i>Support</i>, <i>Challenge</i> und <i>Erweiterung</i>. Die KI füllt sie, die Lehrkraft entscheidet, was bleibt.</p></div>
+  </div>
+
+  <div class="panel" role="tabpanel" id="p-b" aria-labelledby="tab-b" hidden>
+    <div class="panel-intro">
+      <h3>Lernkontrolle mit Erwartungshorizont</h3>
+      <p class="muted">Aus dem Material einer laufenden Reihe entsteht ein Test mit Lösung, Punkten und klaren Bewertungsregeln.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span>Kopiervorlage</span><button class="copy" type="button" id="copy-b">Kopieren</button></div>
+<pre class="prompt" id="pr-b">Ich bin Lehrkraft an einer Grundschule in NRW. In Klasse <span class="ph">[Klasse]</span> haben wir in den letzten Wochen <span class="ph">[Thema]</span> behandelt. Im Anhang sind die Arbeitsblätter, mit denen wir gearbeitet haben.
+
+Erstelle eine Lernkontrolle für etwa <span class="ph">[30]</span> Minuten:
+- 4 bis 5 Aufgaben, von leicht nach schwer,
+- nur Begriffe und Darstellungen, die im Material vorkommen,
+- genug Platz zum Schreiben.
+
+Erstelle dazu einen Erwartungshorizont: Lösung, Punkte pro Aufgabe und eine Regel, wie Teilrichtiges bewertet wird.
+
+Fertig ist es, wenn jede Aufgabe einem Lernziel zugeordnet ist. Nenne am Ende die Stellen, die ich fachlich besonders prüfen sollte.</pre>
+    </div>
+    <p class="hint">Die KI hilft beim <b>Erstellen</b> der Lernkontrolle. Korrigieren und bewerten müsst ihr selbst: Kinderarbeiten und Prüfungen gehören nicht in die KI.</p>
+    <div class="example"><p><b>So bei uns:</b> Die Prüfung „Wörtliche Rede“ (Klasse 4) hat 46 Punkte und eine Bewertungsregel pro Aufgabe, etwa „alle Zeichen richtig = 2, ein Fehler = 1“. Begriffe und Farben sind dieselben wie im Übungsheft.</p></div>
+  </div>
+
+  <div class="panel" role="tabpanel" id="p-c" aria-labelledby="tab-c" hidden>
+    <div class="panel-intro">
+      <h3>Für fachfremd Unterrichtende</h3>
+      <p class="muted">Für Kolleg*innen, die das Fach nicht studiert haben, auch in der Vertretung: ein Ablauf auf einer Seite, ohne Fachjargon.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span>Kopiervorlage</span><button class="copy" type="button" id="copy-c">Kopieren</button></div>
+<pre class="prompt" id="pr-c">Eine Lehrkraft, die <span class="ph">[Fach]</span> nicht studiert hat, soll in Klasse <span class="ph">[Klasse]</span> diese Stunde halten (<span class="ph">[45/60]</span> Minuten): <span class="ph">[Stichpunkte zur Stunde oder Entwurf im Anhang]</span>.
+
+Erstelle einen Kurzentwurf auf einer Seite im Querformat:
+- Ablauf in Phasen mit Minutenangaben,
+- was die Lehrkraft wörtlich zu den Kindern sagt,
+- welches Material bereitliegen muss,
+- was zu tun ist, wenn etwas nicht klappt.
+
+Kein Fachjargon. Fertig ist es, wenn jemand ohne Vorbereitung damit unterrichten kann. Frag nach, wenn dir für einen Schritt Informationen fehlen.</pre>
+    </div>
+    <div class="example"><p><b>So bei uns:</b> Zum Herbstlied für die 1–4er-Gruppe gibt es eine Ablaufkarte (Sekunde in der Audiodatei, Liedteil, welche Gruppe spielt), Bildkarten für die Einsätze und „patsch – klatsch“ statt „schwer – leicht“.</p></div>
+  </div>
+
+  <div class="panel" role="tabpanel" id="p-d" aria-labelledby="tab-d" hidden>
+    <div class="panel-intro">
+      <h3>Eine kleine Übung zum Antippen</h3>
+      <p class="muted">Für Mutige: Die KI baut ein Quiz oder Zuordnungsspiel als Webseite, das ihr als Material im Unterricht einsetzt. In Gemini und ChatGPT über <b>Canvas</b>, in Claude als <b>Artefakt</b>.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span>Kopiervorlage</span><button class="copy" type="button" id="copy-d">Kopieren</button></div>
+<pre class="prompt" id="pr-d">Baue eine kleine interaktive Übung als einzelne Webseite für Klasse <span class="ph">[Klasse]</span> zum Thema <span class="ph">[Thema]</span>.
+
+- 10 Aufgaben, Aufgabentyp: <span class="ph">[richtige Antwort wählen / Paare zuordnen / in zwei Gruppen sortieren]</span>
+- sofortige Rückmeldung, bei Fehlern ein kurzer Tipp
+- große Schrift und große Knöpfe fürs Tablet, kindgerechte Sprache
+- keine Namenseingabe, keine Anmeldung, nichts speichern
+
+Diese Inhalte sollen vorkommen: <span class="ph">[Wörter, Aufgaben oder Lösungen einfügen]</span>
+
+Fertig ist es, wenn ein Kind die Übung ohne Erklärung bedienen kann und alle Inhalte fachlich stimmen.</pre>
+    </div>
+    <p class="hint">Vor dem Einsatz mit Kindern: alle Aufgaben selbst durchspielen. Und klären, wie die Kinder die Seite erreichen. Ein geteilter Link läuft über den Anbieter, das ist eine Datenschutzfrage für die Schule.</p>
+    <div class="example"><p><b>So bei uns:</b> Aus diesem Prinzip sind über Monate richtige Lern-Apps geworden, etwa der Rhythmus-Trainer und die Redezeichen-Helden (Links unten). Für heute reicht eine Übung.</p></div>
+  </div>
+
+  <div class="panel" role="tabpanel" id="p-e" aria-labelledby="tab-e" hidden>
+    <div class="panel-intro">
+      <h3>Organisation: Stichpunkte rein, Entwurf raus</h3>
+      <p class="muted">Elternbrief, Protokoll, Teams-Nachricht, Planungsübersicht. Hier sparen viele am schnellsten Zeit.</p>
+    </div>
+    <div class="card">
+      <div class="card-top"><span>Kopiervorlage Elternbrief</span><button class="copy" type="button" id="copy-f">Kopieren</button></div>
+<pre class="prompt" id="pr-f">Ich bin Klassenleitung einer Grundschulklasse in NRW (Jahrgang <span class="ph">[1–4]</span>). Schreib aus diesen Stichpunkten einen Elternbrief:
+<span class="ph">[Anlass, Datum und Uhrzeit, was die Kinder mitbringen, bis wann eine Rückmeldung nötig ist]</span>
+
+- freundlich und kurz, höchstens eine Seite
+- einfache Sprache: kurze Sätze, keine Fachbegriffe, weil nicht alle Familien gut Deutsch lesen
+- Daten und Fristen fett
+- am Ende ein Abschnitt zum Abtrennen für die Rückmeldung
+
+Fertig ist es, wenn Eltern in einer Minute wissen, was sie tun müssen. Erfinde keine Termine oder Angaben, die nicht in meinen Stichpunkten stehen.</pre>
+    </div>
+    <div class="check">
+      <h3>Weitere Orga-Ideen für denselben Ablauf</h3>
+      <ul>
+        <li><b>Protokoll:</b> Konferenz-Stichpunkte einfügen, „als Ergebnisprotokoll mit Beschlüssen und Zuständigkeiten“.</li>
+        <li><b>Teams-Nachricht:</b> „Mach daraus einen kurzen Beitrag fürs Kollegium, das Wichtigste zuerst.“</li>
+        <li><b>Planungsübersicht:</b> Ferientermine und Themen eingeben, „als Tabelle nach Kalenderwochen“.</li>
+        <li><b>Übersetzung:</b> Elternbrief in eine Herkunftssprache übertragen, wenn möglich von einer Person gegenlesen lassen, die die Sprache spricht.</li>
+      </ul>
+    </div>
+    <div class="example"><p><b>So bei uns:</b> Der Epochenplan Musik 26/27 liegt als Übersicht mit Quartalen, Kalenderwochen, Ferien und Reihen vor und ist Grundlage für jede neue Reihe.</p></div>
+  </div>
+
+  <div class="check">
+    <h3>Prüfen (10 Minuten, gehört dazu)</h3>
+    <ul>
+      <li>Ist alles fachlich richtig? Lösungen selbst nachrechnen, Termine und Fristen abgleichen.</li>
+      <li>Passt Sprache und Umfang zu meiner Lerngruppe?</li>
+      <li>Rechtschreibung, Zeichensetzung, deutsche Anführungszeichen „ “?</li>
+      <li>Stimmen Begriffe und Darstellungen mit denen aus meinem Unterricht überein?</li>
+      <li>Stammen Bilder und Texte aus Quellen, die ich verwenden darf?</li>
+    </ul>
+  </div>
+    <h3>Nachsteuern</h3>
+    <p class="muted">Das erste Ergebnis ist ein Entwurf. Antippen kopiert den Satz, dann einfach im selben Chat einfügen.</p>
+  <div class="chips">
+    <button type="button" id="chip-1">Kürzer, höchstens eine Seite.</button>
+    <button type="button" id="chip-2">Größere Schrift und mehr Platz zum Schreiben.</button>
+    <button type="button" id="chip-3">Einfachere Sprache, passend für Klasse 2.</button>
+    <button type="button" id="chip-4">Was hast du ergänzt, und was sollte ich prüfen?</button>
+    <button type="button" id="chip-5">Gib mir das als Word-Datei.</button>
+    <button type="button" id="chip-6">Hinterfrage meinen Plan kritisch: Was könnte im Unterricht schiefgehen?</button>
+  </div>
+  </div>
+</details>
+
+<details class="step" id="s4">
+  <summary>
+    <span class="step-num">4</span>
+    <span class="step-head"><span class="step-title">Festhalten und teilen <small>5 + 15 Min.</small></span><span class="step-desc">Ergebnis in unserem OneDrive ablegen und gemeinsam auswerten.</span></span>
+  </summary>
+  <div class="step-body">
+    <p class="muted">Haltet euer Ergebnis fest und bringt eine Antwort auf diese Fragen mit.</p>
+  <ol class="refl">
+    <li>Wie lange hätte das ohne KI gedauert, wie lange hat es mit KI gedauert, prüfen eingerechnet?</li>
+    <li>Was musstest du korrigieren oder ergänzen?</li>
+    <li>Würdest du das Ergebnis im Unterricht einsetzen? Was fehlt noch dafür?</li>
+    <li>Was probierst du als Nächstes aus?</li>
+  </ol>
+  <div class="planb">
+    <h3>Ergebnis teilen: in unserem OneDrive</h3>
+    <p>Leg dein Ergebnis dort ab und schreib den Prompt dazu, mit dem es entstanden ist. So wächst eine Sammlung, aus der alle schöpfen können. Keine Daten der Kinder, auch nicht im Ergebnis.</p>
+  </div>
+  </div>
+</details>
+</section>
+
+<section class="steps-list" aria-labelledby="h-more">
+  <h2 id="h-more">Zum Weiterlesen</h2>
+<details class="step extra" id="x1">
+  <summary><span class="step-head"><span class="step-title">Einmal erklären, nicht jedes Mal</span><span class="step-desc">Eine Anweisung für Gem oder Projekt, damit jeder neue Chat eure Regeln kennt.</span></span></summary>
+  <div class="step-body">
+    <p class="muted">Diese Anweisung kommt in ein Gem (Gemini) oder Projekt (ChatGPT, Claude), dazu eine gelungene Vorlage und der Lehrplan als PDF. Jeder neue Chat kennt dann eure Regeln.</p>
+  <div class="card">
+    <div class="card-top"><span>Anweisung für Gem oder Projekt</span><button class="copy" type="button" id="copy-e">Kopieren</button></div>
+<pre class="prompt" id="pr-e">Ich bin Grundschullehrkraft in NRW, Fach <span class="ph">[Fach]</span>, Klassen <span class="ph">[Klassen]</span>.
+
+Für alle Materialien gilt:
+- Lehrplanbezug: Kompetenzerwartungen wörtlich aus dem Lehrplan NRW zitieren (PDF liegt bei), keine Umschreibungen.
+- Format: wie in der Vorlage <span class="ph">[Dateiname]</span>, z. B. Querformat, Tabelle mit Phase, Inhalt, Sozialform, Medien, Kommentar.
+- Sprache für Kinder: kurze Sätze, keine Fremdwörter, deutsche Anführungszeichen „ “.
+- Differenzierung immer mit Support und Challenge.
+- Kennzeichne, was du selbst ergänzt hast und was ich prüfen muss.
+- Hinterfrage meine Ideen kritisch, statt sie schönzureden.
+
+Wenn ich „Stand sichern“ schreibe: Fasse Ergebnis und offene Punkte so zusammen, dass ich es in mein Übergabe-Dokument kopieren kann.</pre>
+  </div>
+
+  </div>
+</details>
+
+<details class="step extra" id="x2">
+  <summary><span class="step-head"><span class="step-title">Vom Canvas zur eigenen Webseite</span><span class="step-desc">Was es braucht, um selbst gebautes Material dauerhaft online zu stellen, inklusive Impressum.</span></span></summary>
+  <div class="step-body">
+    <p class="muted">Wer eine Übung aus Weg D dauerhaft und ohne Anbieter bereitstellen will, braucht eine eigene Webseite. So laufen die Apps unten.</p>
+      <h3>Zwei Wege</h3>
+      <ul>
+        <li><b>Link vom Anbieter</b> (Canvas oder Artefakt teilen): sofort fertig. Die Seite liegt aber bei Google, OpenAI oder Anthropic. Für den Einsatz mit Kindern vorher mit der Schulleitung klären.</li>
+        <li><b>Eigene Webseite über GitHub Pages:</b> kostenlos, dauerhafter Link, QR-Code möglich. Ein KI-Agent (z. B. Claude Code) baut die Seite und lädt sie hoch. Dafür braucht es ein GitHub-Konto und etwas Einarbeitung.</li>
+      </ul>
+      <h3>Pflicht bei jeder eigenen Seite</h3>
+      <ul>
+        <li><b>Impressum</b> mit Name, ladungsfähiger Anschrift und E-Mail, ohne Passwort und mit wenigen Klicks erreichbar. Für private, nicht-kommerzielle Seiten gilt § 18 Abs. 1 Medienstaatsvertrag.</li>
+        <li><b>Datenschutzerklärung</b>, die auch das Hosting nennt: GitHub protokolliert beim Aufruf technische Daten wie die IP-Adresse.</li>
+        <li><b>Keine fremden Dienste einbinden</b>, also keine Schriften von Google Fonts, keine Skripte von fremden Servern, keine Statistik. Das LG München hat 2022 eingebundene Google Fonts als Datenschutzverstoß gewertet.</li>
+        <li><b>Keine Anmeldung, keine Namen, nichts auf einem Server speichern.</b> Fortschritt höchstens über einen Code, den die Kinder abschreiben.</li>
+        <li>Welche Anschrift ins Impressum kommt (privat oder Schule) und ob die Seite im Unterricht eingesetzt wird: <b>vorher mit Schulleitung und Datenschutz-Ansprechperson absprechen.</b></li>
+      </ul>
+      <p class="muted">Das ist keine Rechtsberatung. Wer es ausprobieren möchte, spricht mich an.</p>
+
+  </div>
+</details>
+
+<details class="step extra" id="x3">
+  <summary><span class="step-head"><span class="step-title">Beispiele aus dem Unterricht</span><span class="step-desc">Lern-Apps für Deutsch, Mathe und Musik, gebaut mit Claude Code.</span></span></summary>
+  <div class="step-body">
+    <p class="muted">Alle Apps laufen im Browser, ohne Anmeldung und ohne Daten der Kinder. Gebaut mit Claude Code.</p>
+  <div class="links">
+    <a href="https://mitlaeuferfotografie.github.io/Musik-Apps/" target="_blank" rel="noopener"><strong>Musik-Apps</strong><small>Übersicht: Rhythmus-Generator, Rhythmus-Trainer, Noten-Rätsel</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/Rhythmus-Trainer/" target="_blank" rel="noopener"><strong>Rhythmus-Trainer</strong><small>Musik · Rhythmen hören und nachbauen, 6 Level</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/redezeichen-helden/" target="_blank" rel="noopener"><strong>Die Redezeichen-Helden</strong><small>Deutsch Kl. 4 · wörtliche Rede</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/verben_expedition/" target="_blank" rel="noopener"><strong>Verben-Expedition</strong><small>Deutsch Kl. 2 · Verben</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/pronomen-magie/" target="_blank" rel="noopener"><strong>Pronomen-Magie</strong><small>Deutsch Kl. 4 · Pronomen</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/AdjektiveDetektiv/" target="_blank" rel="noopener"><strong>Die Adjektiv-Detektive</strong><small>Deutsch Kl. 2 · Adjektive</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/MatheAgent/" target="_blank" rel="noopener"><strong>Agent M – Math Mission</strong><small>Mathe Kl. 4/5</small></a>
+  </div>
+  </div>
+</details>
+</section>
+
+<footer>
+  <p>Die drei Schritte zum guten Prompt und der Grundgedanke „vom Erstellen zum Beurteilen“ stammen aus dem frei verwendbaren Master-Paket <a href="https://erikdahlmann.github.io/KI-Tag/" target="_blank" rel="noopener">„Medienpädagogischer Tag KI“</a>.</p>
+  <p class="legal"><a href="impressum.html">Impressum und Datenschutz</a></p>
+</footer>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden>Kopiert</div>
+
+<script>
+(function(){
+  var toast=document.getElementById('toast'), tt;
+  function show(msg){toast.textContent=msg;toast.hidden=false;clearTimeout(tt);tt=setTimeout(function(){toast.hidden=true},1800);}
+  function selectText(el){try{var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);}catch(e){}}
+  function copy(text,btn,el,label){
+    var ok=function(){show('Kopiert');if(btn){btn.classList.add('done');if(label){btn.textContent='Kopiert';}setTimeout(function(){btn.classList.remove('done');if(label){btn.textContent=label;}},1600);}};
+    var fail=function(){if(el){selectText(el);}show('Text markiert, jetzt Strg+C bzw. Kopieren');};
+    try{navigator.clipboard.writeText(text).then(ok,fail);}catch(e){fail();}
+  }
+  ['a','b','c','d','e','f'].forEach(function(k){
+    var b=document.getElementById('copy-'+k), p=document.getElementById('pr-'+k);
+    b.addEventListener('click',function(){copy(p.innerText,b,p,'Kopieren');});
+  });
+  document.querySelectorAll('.chips button').forEach(function(b){
+    b.addEventListener('click',function(){copy(b.textContent,b,b,null);});
+  });
+
+  // Register
+  var tabs=[].slice.call(document.querySelectorAll('[role="tab"]'));
+  function activate(t,focus){
+    tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});
+    if(focus)t.focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){activate(t);});
+    t.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){activate(tabs[(i+1)%tabs.length],true);e.preventDefault();}
+      if(e.key==='ArrowLeft'){activate(tabs[(i-1+tabs.length)%tabs.length],true);e.preventDefault();}
+    });
+  });
+  activate(tabs[0]);
+
+})();
+</script>
+
+</body>
+</html>

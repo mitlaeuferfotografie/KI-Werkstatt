@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressum und Datenschutz</title>
+<style>
+/* Nur Systemschriften: die Seite lädt nichts von fremden Servern. Layout: eine ruhige Lesespalte wie ein Arbeitsheft; die vier Wege als Register, Prompts als Karteikarten mit Kopierknopf */
+:root{
+  --paper:#F7F4EE; --sheet:#FFFDF8; --ink:#1F2A3A; --ink-soft:#4A5568; --line:#DDD5C6;
+  --teal:#22686E; --teal-soft:#E3EFEE; --warm:#A8560F; --warm-fill:#F6DDBC; --onteal:#F7F4EE;
+  --mark:#FCE7C8; --code:#F1ECE2;
+  --f-display: Georgia, 'Times New Roman', serif;
+  --f-body: system-ui, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --f-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#151C26; --sheet:#1D2633; --ink:#ECE7DD; --ink-soft:#B6BFCC; --line:#334155;
+  --teal:#6CC0C3; --teal-soft:#1E3A3D; --warm:#F2B266; --warm-fill:#4A3418; --onteal:#10262A;
+  --mark:#4A3418; --code:#232E3D; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#151C26; --sheet:#1D2633; --ink:#ECE7DD; --ink-soft:#B6BFCC; --line:#334155;
+  --teal:#6CC0C3; --teal-soft:#1E3A3D; --warm:#F2B266; --warm-fill:#4A3418; --onteal:#10262A;
+  --mark:#4A3418; --code:#232E3D; color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;padding:0 16px}
+.wrap{max-width:860px;margin:0 auto;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--f-display);line-height:1.2;text-wrap:balance;margin:0;color:var(--ink)}
+h1{font-size:clamp(2rem,6vw,3.1rem);font-weight:700}
+h2{font-size:clamp(1.5rem,4vw,2rem);font-weight:700}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+a{color:var(--teal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.eyebrow{font-size:.8rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--warm)}
+.lead{font-size:1.15rem;color:var(--ink-soft);max-width:62ch}
+section{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-direction:column;gap:6px}
+.muted{color:var(--ink-soft)}
+
+/* Kopf */
+header{display:flex;flex-direction:column;gap:18px}
+.focus{border:2px solid var(--warm);background:var(--sheet);border-radius:12px;padding:14px 18px}
+.focus b{color:var(--warm)}
+.timeline{display:grid;grid-template-columns:30fr 45fr 15fr;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--sheet)}
+.timeline div{padding:14px 16px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.timeline div+div{border-left:1px solid var(--line)}
+.timeline .now{background:var(--teal);color:var(--onteal)}
+.timeline b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.timeline span{font-size:.92rem}
+@media (max-width:520px){.timeline{grid-template-columns:1fr}.timeline div+div{border-left:none;border-top:1px solid var(--line)}}
+
+/* Werkzeugwahl */
+.toolpick{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toolpick button{font:inherit;font-weight:700;padding:8px 18px;border-radius:999px;border:2px solid var(--teal);background:transparent;color:var(--teal);cursor:pointer}
+.toolpick button[aria-pressed="true"]{background:var(--teal);color:var(--onteal)}
+.tooltips{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px}
+.tip{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.tip h3{font-family:var(--f-body);font-size:1rem;font-weight:800}
+
+/* Regeln */
+.rules{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:620px){.rules{grid-template-columns:1fr}}
+.rule{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.rule h3{font-family:var(--f-body);font-size:1rem;font-weight:800;margin-bottom:6px}
+.rule.ok h3{color:var(--teal)} .rule.no h3{color:var(--warm)}
+.rule ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+
+/* Drei Schritte */
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.steps .n{font-family:var(--f-display);font-size:1.8rem;color:var(--teal);line-height:1}
+.steps strong{display:block}
+
+/* Register der Wege */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;border-bottom:2px solid var(--line);padding-bottom:0}
+.tabs button{font:inherit;font-weight:700;background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-2px;padding:10px 14px;color:var(--ink-soft);cursor:pointer;text-align:left}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--warm)}
+.tabs .letter{font-family:var(--f-display);color:var(--teal);margin-right:6px}
+.panel{display:flex;flex-direction:column;gap:20px;padding-top:6px}
+.panel-intro{display:flex;flex-direction:column;gap:6px}
+
+/* Prompt-Karte */
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 12px 10px 18px;border-bottom:1px dashed var(--line);flex-wrap:wrap}
+.card-top span{font-size:.85rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft)}
+.copy{font:inherit;font-size:.92rem;font-weight:800;padding:7px 14px;border-radius:8px;border:none;background:var(--teal);color:var(--onteal);cursor:pointer}
+.copy.done{background:var(--warm-fill);color:var(--ink)}
+.prompt{margin:0;padding:16px 18px;font-family:var(--f-body);font-size:1rem;line-height:1.6;white-space:pre-wrap;word-wrap:break-word;color:var(--ink)}
+.ph{background:var(--mark);border-radius:4px;padding:0 3px;font-weight:700}
+.check{display:flex;flex-direction:column;gap:8px}
+.check h3{font-family:var(--f-body);font-size:1rem;font-weight:800}
+.check ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.planb{background:var(--sheet);border:1px dashed var(--line);border-radius:12px;padding:16px 20px;display:flex;flex-direction:column;gap:6px}
+.planb h3{font-family:var(--f-body);font-size:1rem;font-weight:800}
+.planb ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--sheet)}
+.tools{width:100%;border-collapse:collapse;font-size:.95rem;min-width:560px}
+.tools th,.tools td{padding:10px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
+.tools thead th{border-top:none;font-weight:800;color:var(--teal)}
+.tools tbody th{font-weight:700;color:var(--ink);width:28%}
+.tools small{color:var(--ink-soft);font-weight:400}
+.twocol{display:grid !important;grid-template-columns:1fr 1fr;column-gap:48px}
+@media (max-width:560px){.twocol{grid-template-columns:1fr}}
+.steps3{display:flex;flex-direction:column;gap:8px}
+.steps3-title{font-weight:800}
+.steps3-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:620px){.steps3-row{grid-template-columns:1fr}}
+.steps3-row p{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.steps3-row .n{font-family:var(--f-display);font-size:1.4rem;color:var(--teal);line-height:1}
+.overview{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sheet)}
+.overview li{padding:10px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.overview li+li{border-left:1px solid var(--line)}
+.overview span{font-size:.9rem;color:var(--ink-soft);font-variant-numeric:tabular-nums}
+@media (max-width:620px){.overview{grid-template-columns:1fr 1fr}.overview li:nth-child(3){border-left:none}.overview li:nth-child(n+3){border-top:1px solid var(--line)}}
+.steps-list{gap:12px}
+.step{background:var(--sheet);border:1px solid var(--line);border-radius:14px}
+.step[open]{border-color:var(--teal)}
+.step>summary{list-style:none;cursor:pointer;display:flex;gap:16px;align-items:flex-start;padding:16px 18px}
+.step>summary::-webkit-details-marker{display:none}
+.step>summary::after{content:"+";margin-left:auto;font-size:1.6rem;line-height:1;color:var(--teal);font-weight:700}
+.step[open]>summary::after{content:"–"}
+.step-num{flex:none;width:40px;height:40px;border-radius:50%;background:var(--teal);color:var(--onteal);display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:1.2rem}
+.step-head{display:flex;flex-direction:column;gap:2px;min-width:0}
+.step-title{font-family:var(--f-display);font-size:1.3rem;font-weight:700}
+.step-title small{font-family:var(--f-body);font-size:.9rem;font-weight:700;color:var(--warm);margin-left:6px}
+.step-desc{color:var(--ink-soft)}
+.step-body{padding:4px 18px 20px;display:flex;flex-direction:column;gap:16px;border-top:1px dashed var(--line);padding-top:18px}
+.step-body h3{font-family:var(--f-display);font-size:1.15rem}
+.extra .step-title{font-size:1.1rem}
+.button{display:inline-block;background:var(--teal);color:var(--onteal);font-weight:800;padding:10px 18px;border-radius:10px;text-decoration:none}
+.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.example{display:flex;gap:14px;align-items:flex-start;background:var(--teal-soft);border-radius:12px;padding:14px 18px}
+.example b{color:var(--teal)}
+.hint{border-left:4px solid var(--warm);padding:4px 0 4px 14px;color:var(--ink-soft)}
+
+/* Nachsteuern */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{font:inherit;font-size:.95rem;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--sheet);color:var(--ink);cursor:pointer;text-align:left}
+.chips button.done{background:var(--warm-fill)}
+
+/* Links */
+.links{display:grid;grid-template-columns:repeat(2,1fr);gap:0 24px;border:1px solid var(--line);border-radius:12px;background:var(--sheet);padding:6px 16px}
+@media (max-width:560px){.links{grid-template-columns:1fr}}
+.links a{display:flex;flex-direction:column;gap:0;padding:8px 0;border-bottom:1px dashed var(--line);text-decoration:none;color:var(--ink);min-width:0}
+.links a:hover strong{text-decoration:underline}
+.links small{color:var(--ink-soft);font-size:.88rem}
+.links strong{color:var(--teal)}
+
+/* Reflexion */
+.refl{margin:0;padding:14px 18px 14px 2.4em;display:flex;flex-direction:column;gap:6px;background:var(--sheet);border:1px solid var(--line);border-radius:12px}
+.more{background:var(--sheet);border:1px solid var(--line);border-radius:12px}
+.more summary{cursor:pointer;padding:14px 18px;font-weight:800;color:var(--teal)}
+.more-body{padding:0 20px 18px;display:flex;flex-direction:column;gap:10px}
+.more-body h3{font-family:var(--f-body);font-size:1rem;font-weight:800;margin-top:6px}
+.more-body ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px}
+.pdf-frame{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--sheet);aspect-ratio:16/10}
+.pdf-frame iframe{width:100%;height:100%;border:0;display:block}
+@media (max-width:700px){.pdf-frame{display:none}}
+footer .legal{margin-top:8px}
+footer{font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--line);padding-top:18px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:999px;font-weight:700;font-size:.95rem}
+@media (prefers-reduced-motion:no-preference){.copy,.chips button,.tabs button{transition:background .15s,border-color .15s}}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+<div class="wrap">
+<header style="display:flex;flex-direction:column;gap:12px">
+  <p><a href="index.html">← Zurück zur KI-Werkstatt</a></p>
+  <h1>Impressum und Datenschutz</h1>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+  <h2>Impressum</h2>
+  <p>Angaben gemäß § 18 Abs. 1 Medienstaatsvertrag (MStV)</p>
+  <p>Peter Brandsch<br>Sandweg 13<br>51503 Rösrath</p>
+  <p>E-Mail: <a href="mailto:p.brandsch@ggs-roesrath.de">p.brandsch@ggs-roesrath.de</a></p>
+  <p>Diese Seite ist ein privates, nicht-kommerzielles Angebot für Kolleg*innen. Sie enthält Materialien zu einem Workshop über KI als Arbeitserleichterung für Lehrkräfte.</p>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:12px">
+  <h2>Datenschutz</h2>
+  <h3>Verantwortlich</h3>
+  <p>Peter Brandsch, Kontaktdaten siehe Impressum.</p>
+  <h3>Hosting über GitHub Pages</h3>
+  <p>Die Seite wird über GitHub Pages bereitgestellt (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA). Beim Aufruf verarbeitet GitHub technisch notwendige Daten, insbesondere die IP-Adresse, um die Seite auszuliefern und den Dienst abzusichern. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Eine Übermittlung in die USA ist dabei möglich. Näheres steht in der <a href="https://docs.github.com/de/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">Datenschutzerklärung von GitHub</a>.</p>
+  <h3>Was diese Seite nicht tut</h3>
+  <p>Keine Cookies, kein Tracking, keine Analyse-Werkzeuge, keine Formulare, keine Anmeldung. Schriften und alle Inhalte werden nicht von fremden Servern nachgeladen. Der Knopf „Kopieren“ legt Text nur in die Zwischenablage des eigenen Geräts.</p>
+  <h3>Externe Links</h3>
+  <p>Die Seite verlinkt auf KI-Anbieter und andere Webseiten. Wer einen Link anklickt, verlässt diese Seite. Dort gelten die Datenschutzbestimmungen der jeweiligen Anbieter.</p>
+  <h3>Ihre Rechte</h3>
+  <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung sowie auf Widerspruch (Art. 15 bis 21 DSGVO). Beschwerden können Sie an die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen richten.</p>
+</section>
+</div>
+</body>
+</html>
