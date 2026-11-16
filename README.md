@@ -1,7 +1,7 @@
 # KI-Werkstatt
 
 ## Was das ist
-Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Workshop im Kollegium, 90 Minuten, KI als Arbeitserleichterung für Lehrkräfte). Statische Seite ohne Build-Schritt.
+Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Workshop im Kollegium, 2 Stunden, KI als Arbeitserleichterung für Lehrkräfte). Statische Seite ohne Build-Schritt.
 
 | Datei | Inhalt |
 |---|---|

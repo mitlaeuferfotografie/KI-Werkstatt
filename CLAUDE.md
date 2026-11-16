@@ -1,7 +1,7 @@
 # KI-Werkstatt – Anweisungen für Claude Code
 
 ## Was das ist
-Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Workshop im Kollegium, 90 Minuten, KI als Arbeitserleichterung für Lehrkräfte). Statische Seite ohne Build-Schritt.
+Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Workshop im Kollegium, 2 Stunden, KI als Arbeitserleichterung für Lehrkräfte). Statische Seite ohne Build-Schritt.
 
 | Datei | Inhalt |
 |---|---|
@@ -25,3 +25,4 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 
 ## Änderungen
 - 16.11.2026: Stand aktualisiert. Präsentation neu (19 Folien: Sankt Martin statt Herbstlied, neue Folie Beobachtungsbogen, Planungsdokument, Ritter-Rost-Beispiel beim Prüfen, Partitur-Generator). Seite: neue Kopiervorlage Beobachtungsbogen (Weg E), Absatz „Das Planungsdokument“, Mathe-Apps und Übersichtsseite bei den Beispielen. Material in der PDF vorher geprüft: keine Namen oder Daten von Kindern (Beobachtungsbogen leer).
+- 16.11.2026 (später): Texte gegen typische KI-Formulierungen überarbeitet. Workshop auf 2 Stunden erweitert: Impuls 30, Startklar 10, Bauen und prüfen 60, Ergebnisse zeigen 20 Minuten. Schritt 4 heißt jetzt „Ergebnisse zeigen“ (Vorstellen am Beamer statt Ablage im OneDrive).
