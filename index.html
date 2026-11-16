@@ -172,7 +172,7 @@ footer{font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--line);pa
 <div class="wrap">
 
 <header>
-  <p class="eyebrow">Information und Workshop im Kollegium · Stand: 05.10.2026</p>
+  <p class="eyebrow">Information und Workshop im Kollegium · Stand: 16.11.2026</p>
   <h1>KI-Werkstatt Unterrichtsvorbereitung</h1>
   <p class="lead">Unterricht vorbereiten, Material anpassen, Organisation: Ihr bringt Material oder Stichpunkte mit, die KI macht den ersten Entwurf, ihr prüft und passt an.</p>
   <div class="focus" role="note">
@@ -194,7 +194,7 @@ footer{font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--line);pa
     <span class="step-head"><span class="step-title">Impuls <small>max. 30 Min.</small></span><span class="step-desc">Was KI uns Lehrkräften abnehmen kann, an Beispielen aus dem Unterricht. Hier liegt auch die Präsentation.</span></span>
   </summary>
   <div class="step-body">
-    <p>Die Präsentation zum Nachlesen (PDF, 18 Folien):</p>
+    <p>Die Präsentation zum Nachlesen (PDF, 19 Folien):</p>
     <p><a class="button" href="KI-Werkstatt-Praesentation.pdf" target="_blank" rel="noopener">Präsentation öffnen</a></p>
     <div class="pdf-frame"><iframe src="KI-Werkstatt-Praesentation.pdf#view=FitH" title="Präsentation KI-Werkstatt" loading="lazy"></iframe></div>
     <h3>Das Wichtigste in Kürze</h3>
@@ -202,7 +202,9 @@ footer{font-size:.9rem;color:var(--ink-soft);border-top:1px solid var(--line);pa
       <li>KI ist hier unser Werkzeug als Lehrkräfte. Kinder arbeiten nicht mit offenen KI-Modellen, und KI korrigiert oder bewertet keine Kinderarbeiten.</li>
       <li>Die Arbeit verschiebt sich vom Erstellen zum Beurteilen. Geprüft wird immer, aber prüfen geht schneller als erfinden.</li>
       <li>Drei Level: Chat (heute für alle), Projekt mit Gedächtnis (Vorlagen und Regeln einmal hinterlegen), Agent und Code (Ausblick).</li>
-      <li>Beispiele: Material für fachfremd Unterrichtende, Lernkontrolle mit Erwartungshorizont, Orga wie Epochenplan und Elternbrief, Stundenentwürfe im eigenen Format.</li>
+      <li>Beispiele: die Sankt-Martin-Stunde für fachfremd Unterrichtende, Lernkontrolle mit Erwartungshorizont, Orga wie Epochenplan und Elternbrief, Stundenentwürfe im eigenen Format.</li>
+      <li>Ein Planungsdokument pro Fach und am Ende jedes Chats „Stand sichern“: So kennt die KI beim nächsten Mal Regeln, Reihen und offene Punkte.</li>
+      <li>Beobachtungsbögen: Die KI baut den Bogen und schreibt pro Stunde, woran man eine Kompetenz erkennt. Beobachten und bewerten tun wir selbst, Namen kommen nicht in die KI.</li>
       <li>Die KI klingt auch dann sicher, wenn sie falsch liegt. Fachliches, Zitate und Termine immer selbst prüfen.</li>
     </ul>
   </div>
@@ -340,7 +342,7 @@ Erstelle einen Kurzentwurf auf einer Seite im Querformat:
 
 Kein Fachjargon. Fertig ist es, wenn jemand ohne Vorbereitung damit unterrichten kann. Frag nach, wenn dir für einen Schritt Informationen fehlen.</pre>
     </div>
-    <div class="example"><p><b>So bei uns:</b> Zum Herbstlied für die 1–4er-Gruppe gibt es eine Ablaufkarte (Sekunde in der Audiodatei, Liedteil, welche Gruppe spielt), Bildkarten für die Einsätze und „patsch – klatsch“ statt „schwer – leicht“.</p></div>
+    <div class="example"><p><b>So bei uns:</b> Für die Sankt-Martin-Stunde (1–4) gibt es eine Vorlesegeschichte mit zehn Klangstellen, Klangkarten mit Instrument, Klangwort und Spielweise und eine Partitur mit Musterlösung. Vorgabe an die KI: kein Fachjargon, Audio statt Vorsingen, genau geplante Einsätze.</p></div>
   </div>
 
   <div class="panel" role="tabpanel" id="p-d" aria-labelledby="tab-d" hidden>
@@ -368,7 +370,7 @@ Fertig ist es, wenn ein Kind die Übung ohne Erklärung bedienen kann und alle I
   <div class="panel" role="tabpanel" id="p-e" aria-labelledby="tab-e" hidden>
     <div class="panel-intro">
       <h3>Organisation: Stichpunkte rein, Entwurf raus</h3>
-      <p class="muted">Elternbrief, Protokoll, Teams-Nachricht, Planungsübersicht. Hier sparen viele am schnellsten Zeit.</p>
+      <p class="muted">Elternbrief, Protokoll, Teams-Nachricht, Planungsübersicht, Beobachtungsbogen. Hier sparen viele am schnellsten Zeit.</p>
     </div>
     <div class="card">
       <div class="card-top"><span>Kopiervorlage Elternbrief</span><button class="copy" type="button" id="copy-f">Kopieren</button></div>
@@ -391,7 +393,19 @@ Fertig ist es, wenn Eltern in einer Minute wissen, was sie tun müssen. Erfinde 
         <li><b>Übersetzung:</b> Elternbrief in eine Herkunftssprache übertragen, wenn möglich von einer Person gegenlesen lassen, die die Sprache spricht.</li>
       </ul>
     </div>
-    <div class="example"><p><b>So bei uns:</b> Der Epochenplan Musik 26/27 liegt als Übersicht mit Quartalen, Kalenderwochen, Ferien und Reihen vor und ist Grundlage für jede neue Reihe.</p></div>
+    <div class="card">
+      <div class="card-top"><span>Kopiervorlage Beobachtungsbogen für eine Reihe</span><button class="copy" type="button" id="copy-g">Kopieren</button></div>
+<pre class="prompt" id="pr-g">Ich bin Lehrkraft an einer Grundschule in NRW, Fach <span class="ph">[Fach]</span>, Klasse <span class="ph">[Klasse]</span>. Die Reihe <span class="ph">[Thema]</span> hat <span class="ph">[Anzahl]</span> Stunden: <span class="ph">[Stichpunkte zu jeder Stunde]</span>.
+Im Zeugnis stehen diese Kompetenzen: <span class="ph">[Kompetenzen im Wortlaut des Zeugnisses]</span>.
+
+Erstelle:
+1. einen Beobachtungsbogen für die ganze Reihe, eine Seite im Querformat: Spalten Nr., Name (leer lassen), eine Spalte pro Stunde mit ihrem Schwerpunkt, Notizen. Skala: ++ sicher, + überwiegend, o teilweise, – selten, –– noch nicht.
+2. für jede Stunde einen Kasten „Beobachtungsschwerpunkt“: höchstens zwei Kompetenzen aus der Liste und drei bis vier Anzeichen, woran ich sie in genau dieser Stunde erkenne.
+
+Fertig ist es, wenn jedes Anzeichen beschreibt, was ein Kind tut oder sagt, und nicht allgemein bleibt. Trag keine Namen ein.</pre>
+    </div>
+    <p class="hint">Die KI baut nur den leeren Bogen. Namen und Beobachtungen tragt ihr selbst ein, auf Papier oder in eurer eigenen Datei, nie in die KI. Pro Stunde reicht es, fünf bis acht Kinder gezielt zu beobachten.</p>
+    <div class="example"><p><b>So bei uns:</b> Der Epochenplan Musik 26/27 liegt als Übersicht mit Quartalen, Kalenderwochen, Ferien und Reihen vor und ist Grundlage für jede neue Reihe. Seit November hat jede Musik-Reihe einen Beobachtungsbogen, das war ein Wunsch aus dem Kollegium.</p></div>
   </div>
 
   <div class="check">
@@ -456,7 +470,12 @@ Für alle Materialien gilt:
 - Kennzeichne, was du selbst ergänzt hast und was ich prüfen muss.
 - Hinterfrage meine Ideen kritisch, statt sie schönzureden.
 
-Wenn ich „Stand sichern“ schreibe: Fasse Ergebnis und offene Punkte so zusammen, dass ich es in mein Übergabe-Dokument kopieren kann.</pre>
+Wenn ich „Stand sichern“ schreibe: Fasse Ergebnis und offene Punkte so zusammen, dass ich es in mein Planungsdokument übernehmen kann.</pre>
+  </div>
+  <div class="planb">
+    <h3>Das Planungsdokument</h3>
+    <p>Eine Textdatei pro Fach, die im Projekt liegt: Epochenplan, feste Regeln für Entwürfe, laufende Reihen mit Stand und offenen Punkten. Ein Chat pro Aufgabe, damit Chats nicht zu lang werden. Am Ende „Stand sichern“, dann kommt das Ergebnis ins Planungsdokument. Der nächste Chat liest es und macht dort weiter.</p>
+    <p class="muted">So bei uns: Für Musik gibt es seit November einen festen Standard für Entwürfe, mit Lehrplanzitat, Planungstabelle, Beobachtungsbogen und einer Checkliste „Material und Vorbereitung“ für jede Stunde.</p>
   </div>
 
   </div>
@@ -496,6 +515,9 @@ Wenn ich „Stand sichern“ schreibe: Fasse Ergebnis und offene Punkte so zusam
     <a href="https://mitlaeuferfotografie.github.io/pronomen-magie/" target="_blank" rel="noopener"><strong>Pronomen-Magie</strong><small>Deutsch Kl. 4 · Pronomen</small></a>
     <a href="https://mitlaeuferfotografie.github.io/AdjektiveDetektiv/" target="_blank" rel="noopener"><strong>Die Adjektiv-Detektive</strong><small>Deutsch Kl. 2 · Adjektive</small></a>
     <a href="https://mitlaeuferfotografie.github.io/MatheAgent/" target="_blank" rel="noopener"><strong>Agent M – Math Mission</strong><small>Mathe Kl. 4/5</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/erkennen_und_zerlegen/" target="_blank" rel="noopener"><strong>Erkennen und Zerlegen</strong><small>Mathe Kl. 1 · Kraft der 5, Zerlegen, alles wird vorgelesen</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/zehner-bande/" target="_blank" rel="noopener"><strong>Die Zehner-Bande</strong><small>Mathe Kl. 2 · Zahlen bis 100, Zehner und Einer</small></a>
+    <a href="https://mitlaeuferfotografie.github.io/" target="_blank" rel="noopener"><strong>Alle Apps auf einen Blick</strong><small>Übersichtsseite nach Fach und Klasse</small></a>
   </div>
   </div>
 </details>
@@ -519,7 +541,7 @@ Wenn ich „Stand sichern“ schreibe: Fasse Ergebnis und offene Punkte so zusam
     var fail=function(){if(el){selectText(el);}show('Text markiert, jetzt Strg+C bzw. Kopieren');};
     try{navigator.clipboard.writeText(text).then(ok,fail);}catch(e){fail();}
   }
-  ['a','b','c','d','e','f'].forEach(function(k){
+  ['a','b','c','d','e','f','g'].forEach(function(k){
     var b=document.getElementById('copy-'+k), p=document.getElementById('pr-'+k);
     b.addEventListener('click',function(){copy(p.innerText,b,p,'Kopieren');});
   });

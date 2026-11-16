@@ -6,7 +6,7 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 | Datei | Inhalt |
 |---|---|
 | `index.html` | Workshop-Seite (4 aufklappbare Schritte, Kopiervorlagen, Beispiele). Präsentation in Schritt 1 als Knopf und eingebettete Ansicht (relativer Link). |
-| `KI-Werkstatt-Praesentation.pdf` | Präsentation, 18 Folien, Stand 05.10.2026 |
+| `KI-Werkstatt-Praesentation.pdf` | Präsentation, 19 Folien, Stand 16.11.2026 |
 | `impressum.html` | Impressum (§ 18 Abs. 1 MStV, Schuladresse) und Datenschutz |
 
 ## Status: veröffentlicht (07.10.2026)
@@ -22,3 +22,6 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 - Feste Botschaften: KI ist Werkzeug der Lehrkräfte, nicht der Kinder. KI korrigiert oder bewertet keine Kinderarbeiten oder Prüfungen.
 - Dateiablage im Text nur als „unser OneDrive“ benennen, keine Team- oder Ordnerstruktur nennen (noch nicht beschlossen).
 - Eine zweite Fassung derselben Seite liegt intern im SharePoint „Medien FAQs“ (Seite KI-Werkstatt). Inhaltliche Änderungen gegebenenfalls dort ebenfalls nachziehen.
+
+## Änderungen
+- 16.11.2026: Stand aktualisiert. Präsentation neu (19 Folien: Sankt Martin statt Herbstlied, neue Folie Beobachtungsbogen, Planungsdokument, Ritter-Rost-Beispiel beim Prüfen, Partitur-Generator). Seite: neue Kopiervorlage Beobachtungsbogen (Weg E), Absatz „Das Planungsdokument“, Mathe-Apps und Übersichtsseite bei den Beispielen. Material in der PDF vorher geprüft: keine Namen oder Daten von Kindern (Beobachtungsbogen leer).
