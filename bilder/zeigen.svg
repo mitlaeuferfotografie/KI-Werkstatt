@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Digitale Tafel mit einem Arbeitsblatt, davor Kolleginnen und Kollegen">
+  <rect x="0" y="0" width="480" height="300" rx="18" fill="#181E27"/>
+  <rect x="72" y="34" width="336" height="170" rx="10" fill="#202835" stroke="#2B3442" stroke-width="3"/>
+  <rect x="88" y="50" width="304" height="138" rx="6" fill="#11151C"/>
+  <rect x="112" y="62" width="88" height="114" rx="4" fill="#EDEFF3"/>
+  <rect x="122" y="74" width="50" height="7" rx="3.5" fill="#11151C"/>
+  <rect x="122" y="90" width="66" height="5" rx="2.5" fill="#A2ABBA"/><rect x="122" y="102" width="28" height="9" rx="2" fill="#F5C26B"/><rect x="122" y="118" width="60" height="5" rx="2.5" fill="#A2ABBA"/><rect x="122" y="130" width="66" height="5" rx="2.5" fill="#A2ABBA"/><rect x="122" y="142" width="44" height="5" rx="2.5" fill="#A2ABBA"/>
+  <rect x="220" y="66" width="150" height="40" rx="8" fill="#6FD3C1" fill-opacity=".18" stroke="#6FD3C1" stroke-width="2"/>
+  <rect x="234" y="80" width="96" height="7" rx="3.5" fill="#6FD3C1"/>
+  <rect x="220" y="118" width="120" height="7" rx="3.5" fill="#A2ABBA"/><rect x="220" y="134" width="96" height="7" rx="3.5" fill="#A2ABBA"/><rect x="220" y="150" width="110" height="7" rx="3.5" fill="#A2ABBA"/>
+  <rect x="232" y="204" width="16" height="22" fill="#2B3442"/>
+  <g fill="#2B3442"><circle cx="150" cy="246" r="16"/><path d="M118 300c0-22 14-36 32-36s32 14 32 36z"/><circle cx="240" cy="252" r="16"/><path d="M208 300c0-22 14-34 32-34s32 12 32 34z"/><circle cx="330" cy="246" r="16"/><path d="M298 300c0-22 14-36 32-36s32 14 32 36z"/></g>
+  <path d="M352 214h70a10 10 0 0 1 10 10v22a10 10 0 0 1-10 10h-46l-14 12v-12h-10a10 10 0 0 1-10-10v-22a10 10 0 0 1 10-10z" fill="#F5C26B"/>
+  <rect x="356" y="228" width="58" height="7" rx="3.5" fill="#0E1A18"/><rect x="356" y="240" width="38" height="7" rx="3.5" fill="#0E1A18"/>
+</svg>

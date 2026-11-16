@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 300" role="img" aria-label="Laptop mit geöffnetem KI-Chat und einer Checkliste">
+  <rect x="0" y="0" width="480" height="300" rx="18" fill="#181E27"/>
+  <rect x="70" y="52" width="250" height="160" rx="10" fill="#202835" stroke="#2B3442" stroke-width="2"/>
+  <rect x="84" y="66" width="222" height="132" rx="6" fill="#11151C"/>
+  <rect x="98" y="80" width="120" height="22" rx="11" fill="#2B3442"/>
+  <rect x="158" y="112" width="134" height="22" rx="11" fill="#6FD3C1"/>
+  <rect x="98" y="144" width="150" height="22" rx="11" fill="#2B3442"/>
+  <rect x="98" y="176" width="196" height="12" rx="6" fill="#202835" stroke="#2B3442"/>
+  <path d="M48 212h294l-14 22H62z" fill="#2B3442"/>
+  <rect x="300" y="96" width="128" height="158" rx="10" fill="#EDEFF3"/>
+  <rect x="318" y="114" width="70" height="9" rx="4.5" fill="#11151C"/>
+  <g stroke-linecap="round" stroke-linejoin="round" stroke-width="4" fill="none">
+    <path d="M318 148l7 7 12-14" stroke="#1A8C7A"/><path d="M318 184l7 7 12-14" stroke="#1A8C7A"/><path d="M318 220l7 7 12-14" stroke="#B9831E"/>
+  </g>
+  <rect x="346" y="146" width="64" height="8" rx="4" fill="#A2ABBA"/>
+  <rect x="346" y="182" width="56" height="8" rx="4" fill="#A2ABBA"/>
+  <rect x="346" y="218" width="62" height="8" rx="4" fill="#A2ABBA"/>
+</svg>

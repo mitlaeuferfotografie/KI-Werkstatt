@@ -5,8 +5,11 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 
 | Datei | Inhalt |
 |---|---|
-| `index.html` | Workshop-Seite (4 aufklappbare Schritte, Kopiervorlagen, Beispiele). Präsentation in Schritt 1 als Knopf und eingebettete Ansicht (relativer Link). |
-| `KI-Werkstatt-Praesentation.pdf` | Präsentation, 19 Folien, Stand 16.11.2026 |
+| `index.html` | Workshop-Seite: Abschnitte Ablauf, Impuls, Startklar machen, Bauen und prüfen (Prompts als Karten mit Fenster), Ergebnisse zeigen, Zum Weitermachen. Präsentation über die Titelfolie im Abschnitt Impuls (relativer Link). |
+| `DESIGN.md` | Gestaltungsregeln (Farben, Schrift, Abstände, Komponenten, Bilder, Bewegung). Vor Änderungen am Aussehen lesen. |
+| `fonts/` | Nunito Sans, lokal (SIL Open Font License) |
+| `bilder/` | Titelfolie und die drei Phasen-Grafiken (SVG) |
+| `KI-Werkstatt-Praesentation.pdf` | Präsentation, 19 Folien, Stand 16.11.2026 (Begriff „Lernzielkontrolle“) |
 | `impressum.html` | Impressum (§ 18 Abs. 1 MStV, Schuladresse) und Datenschutz |
 
 ## Status: veröffentlicht (07.10.2026)
@@ -16,7 +19,7 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 - Achtung: Alles, was hier hochgeladen wird, ist sofort für alle abrufbar. Neue Material-Ausschnitte vorher auf Namen und Daten von Kindern prüfen.
 
 ## Regeln für Änderungen
-- Keine externen Ressourcen einbinden (keine Google Fonts, keine CDNs, kein Tracking). Nur Systemschriften.
+- Keine externen Ressourcen einbinden (keine Google Fonts, keine CDNs, kein Tracking). Schriften nur lokal aus `fonts/`.
 - Impressum und Datenschutz-Link im Footer von `index.html` nicht entfernen.
 - Sprache: gendergerecht (Kolleg*innen, Lehrkräfte), „Level 1–3“ für die KI-Nutzung, „Prompt“ statt „Auftrag“ für Eingaben an die KI.
 - Feste Botschaften: KI ist Werkzeug der Lehrkräfte, nicht der Kinder. KI korrigiert oder bewertet keine Kinderarbeiten oder Prüfungen.
@@ -26,3 +29,4 @@ Begleitseite zum Workshop „Mehr Zeit für Unterricht“ (Information und Works
 ## Änderungen
 - 16.11.2026: Stand aktualisiert. Präsentation neu (19 Folien: Sankt Martin statt Herbstlied, neue Folie Beobachtungsbogen, Planungsdokument, Ritter-Rost-Beispiel beim Prüfen, Partitur-Generator). Seite: neue Kopiervorlage Beobachtungsbogen (Weg E), Absatz „Das Planungsdokument“, Mathe-Apps und Übersichtsseite bei den Beispielen. Material in der PDF vorher geprüft: keine Namen oder Daten von Kindern (Beobachtungsbogen leer).
 - 16.11.2026 (später): Texte gegen typische KI-Formulierungen überarbeitet. Workshop auf 2 Stunden erweitert: Impuls 30, Startklar 10, Bauen und prüfen 60, Ergebnisse zeigen 20 Minuten. Schritt 4 heißt jetzt „Ergebnisse zeigen“ (Vorstellen an der digitalen Tafel statt Ablage im OneDrive).
+- 16.11.2026 (abends): Seite komplett neu gestaltet nach DESIGN.md: dunkel, modern, ohne Aufklapp-Reiter, Texte gekürzt, ein Bild pro Phase, Schrift Nunito Sans lokal. „Lernkontrolle“ heißt jetzt überall „Lernzielkontrolle“, „Startklar“ heißt „Startklar machen“. Impressum im neuen Design.
